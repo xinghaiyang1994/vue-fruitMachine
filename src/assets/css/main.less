@@ -1,0 +1,365 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.clearfix{
+    &:after{
+        content: '';
+        display: block;
+        clear: both;
+    }
+    zoom: 1;
+}
+
+.fruit{
+    width: 100%;
+    height: 10.8rem;
+    background: url(../img/bg.jpg) no-repeat center;
+    background-size: cover;
+    overflow: hidden;
+}
+.fruit-body{
+    width: 5.4rem;
+    height: 5.4rem;
+    margin: 1.24rem auto 0;
+    position: relative;
+    >li{
+        width: 0.71rem;
+        height: 0.71rem;
+        border-radius: 0.05rem;
+        overflow: hidden;
+        position: absolute;
+        >img{
+            width: 100%;
+            height: 100%;
+        }
+        >em{
+            display: none;
+            width: 0.63rem;
+            height: 0.63rem;
+            border: 0.04rem solid #FF0000;
+            border-radius: 0.05rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+    .fruit-mod-act{
+        >em{
+            display: block;
+        }
+    }
+    .fruit-mod1{
+        top: 0.03rem;
+        left: 0.03rem;
+    }
+    .fruit-mod2{
+        top: 0.03rem;
+        left: 0.80rem;
+    }
+    .fruit-mod3{
+        top: 0.03rem;
+        left: 1.57rem;
+    }
+    .fruit-mod4{
+        top: 0.03rem;
+        left: 2.34rem;
+    }
+    .fruit-mod5{
+        top: 0.03rem;
+        left: 3.11rem;
+    }
+    .fruit-mod6{
+        top: 0.03rem;
+        left: 3.88rem;
+    }
+    .fruit-mod7{
+        top: 0.03rem;
+        right: 0.03rem;
+    }
+    .fruit-mod8{
+        top: 0.8rem;
+        right: 0.03rem;
+    }
+    .fruit-mod9{
+        top: 1.57rem;
+        right: 0.03rem;
+    }
+    .fruit-mod10{
+        top: 2.34rem;
+        right: 0.03rem;
+    }
+    .fruit-mod11{
+        top: 3.11rem;
+        right: 0.03rem;
+    }
+    .fruit-mod12{
+        top: 3.88rem;
+        right: 0.03rem;
+    }
+    .fruit-mod13{
+        bottom: 0.03rem;
+        right: 0.03rem;
+    }
+    .fruit-mod14{
+        bottom: 0.03rem;
+        right: 0.8rem;
+    }
+    .fruit-mod15{
+        bottom: 0.03rem;
+        right: 1.57rem;
+    }
+    .fruit-mod16{
+        bottom: 0.03rem;
+        right: 2.34rem;
+    }
+    .fruit-mod17{
+        bottom: 0.03rem;
+        right: 3.11rem;
+    }
+    .fruit-mod18{
+        bottom: 0.03rem;
+        right:3.88rem;
+    }
+    .fruit-mod19{
+        bottom: 0.03rem;
+        left: 0.03rem;
+    }
+    .fruit-mod20{
+        bottom: 0.8rem;
+        left: 0.03rem;
+    }
+    .fruit-mod21{
+        bottom: 1.57rem;
+        left: 0.03rem;
+    }
+    .fruit-mod22{
+        bottom: 2.34rem;
+        left: 0.03rem;
+    }
+    .fruit-mod23{
+        bottom: 3.11rem;
+        left: 0.03rem;
+    }
+    .fruit-mod24{
+        bottom: 3.88rem;
+        left: 0.03rem;
+    }
+}
+.fruit-top{
+    position: relative;
+}
+.fruit-top-num-box{
+    width: 2.49rem;
+    height: 0.5rem;
+    background: url(../img/fruit-top-num.png) no-repeat center;
+    background-size:cover;
+    border-radius: 0.05rem;
+    position: absolute;
+    left: 50%;
+    margin-left: -1.25rem;
+    bottom: 1.12rem;
+}
+.fruit-top-num{
+    .clearfix;
+    width: 0.6rem;
+    height: 0.35rem;
+    overflow: hidden;
+    margin: 0.07rem auto 0;
+    >li{
+        .fl;
+        width: 0.3rem;
+        height: 0.35rem;
+        overflow: hidden;
+        position: relative;
+    }
+}
+.num{
+    width: 0.3rem;
+    height: 3.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.fruit-score{
+    .clearfix;
+    width: 5.7rem;
+    height: 0.88rem;
+    margin: 0.32rem auto 0.24rem;
+}
+.fruit-score-mod{
+    .fl;
+    width: 2.85rem;
+}
+.score{
+    display: block;
+    height: 0.38rem;
+    margin: 0 auto;
+}
+.fruit-score-mod-bottom{
+    width: 2.49rem;
+    height: 0.5rem;
+    margin: 0 auto;
+    background: url(../img/fruit-top-num.png) no-repeat center;
+    background-size:cover;
+    border-radius: 0.05rem;
+    overflow: hidden;
+}
+.score-box{
+    .clearfix;
+    width: 2.1rem;
+    margin: 0.07rem auto 0;
+    >li{
+        .fl;
+        width: 0.3rem;
+        height: 0.35rem;
+        position: relative;
+        overflow: hidden;
+    }
+}
+.score-boxs{
+    width: 1.8rem;
+}
+.fruit-bottom{
+    .clearfix;
+    width: 5.75rem;
+    margin: 0 auto;
+}
+.fruit-bottom-mod{
+    .fl;
+    width: 0.64rem;
+    margin: 0 0.03rem;
+}
+.fruit-bottom-mod-count{
+    .clearfix;
+    padding: 0 0.02rem;
+    background: #3d556d;
+    border-radius: 0.05rem;
+    margin-bottom: 0.1rem;
+    >li{
+        .fl;
+        width: 0.3rem;
+        height: 0.35rem;
+        overflow: hidden;
+        position: relative;
+    }
+}
+.btn1{
+    width: 0.87rem;
+    height: 0.99rem;
+}
+.fruit-bottom-mod-btn{
+    .btn-act{
+        display: none;
+    }
+}
+.fruit-bottom-mod-btn:active{
+    >img{
+        display: none;
+    }
+    .btn-act{
+        display: block;
+    }
+}
+.fruit-bottom-mod-4{
+    margin-right: 0.16rem;
+}
+.fruit-bottom-mod-btn1{
+    margin-left: -0.24rem;
+}
+.fruit-bottom-mod-btn2{
+    margin-left: -0.16rem;
+}
+.fruit-bottom-mod-btn3{
+    margin-left: -0.1rem;
+}
+.fruit-bottom-mod-btn4{
+    margin-left: -0.05rem;
+}
+.fruit-bottom-mod-btn5{
+    margin-left: -0.02rem;
+}
+.fruit-bottom-mod-btn6{
+    margin-left: 0;
+}
+.fruit-bottom-mod-btn7{
+    margin-left: -0.05rem;
+}
+.fruit-bottom-mod-btn8{
+    margin-left: 0.04rem;
+}
+.btn-box{
+    .clearfix;
+    width: 100%;
+    height: 0.76rem;
+    margin-bottom: 0.14rem;
+}
+.btn-left{
+    .fl;
+    .clearfix;
+    >li{
+        .fl;
+    }
+}
+.btn2-mod{
+    >img{
+        width: 0.8rem;
+        height: 0.72rem;
+    }
+    .btn2-mod-act{
+        display: none;
+    }
+}
+.btn2-mod:active{
+    img{
+        display: none;
+    }
+    .btn2-mod-act{
+        display: block;
+    }
+}
+.btn3-mod{
+    .fr;
+    margin-right: 0.28rem;
+    >img{
+        width: 1.25rem;
+        height: 0.62rem;
+    }
+    .btn3-mod-act{
+        display: none;
+    }
+}
+.btn3-mod:active{
+    img{
+        display: none;
+    }
+    .btn3-mod-act{
+        display: block;
+    }
+}
+.btn-left1{
+    margin-left: 0.6rem;
+    >li{
+        margin:0  0.1rem ;
+    }
+}
+.btn-left2{
+    margin-left: 0.46rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
