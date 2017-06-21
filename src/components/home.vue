@@ -194,7 +194,7 @@
 				</li>
 			</ul>
 			
-			<div class="btn3-mod" id="start">
+			<div class="btn3-mod" id="start" @click="addNum">
 				<img src="../assets/img/start.png"/>
 				<img src="../assets/img/starts.png" class="btn3-mod-act"/>
 			</div>
@@ -202,116 +202,48 @@
 		</div>	
 		<!--按键-->
 		<div class="fruit-bottom">
-			<div class="fruit-bottom-mod">
-				<ul class="fruit-bottom-mod-count" id="num-0">
+			<div class="fruit-bottom-mod" :class="index == 3?'fruit-bottom-mod-4':''" v-for="(item,index) in aBet">
+				<ul class="fruit-bottom-mod-count" :id="'num-'+index">
 					<li>
-						<img src="../assets/img/num.png" class="num"/>
+						<img src="../assets/img/num.png" class="num" />
 					</li>
 					<li>
 						<img src="../assets/img/num.png" class="num"/>
 					</li>
 				</ul>
-				<div class="fruit-bottom-mod-btn fruit-bottom-mod-btn1">
-					<img src="../assets/img/choose-1.png" class="btn1"/>
-					<img src="../assets/img/choose-1s.png" class="btn1 btn-act"/>
-				</div>
-			</div>
-			<div class="fruit-bottom-mod">
-				<ul class="fruit-bottom-mod-count" id="num-1">
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-				</ul>
-				<div class="fruit-bottom-mod-btn fruit-bottom-mod-btn2">
-					<img src="../assets/img/choose-2.png" class="btn1"/>
-					<img src="../assets/img/choose-2s.png" class="btn1 btn-act"/>
-				</div>
-			</div>
-			<div class="fruit-bottom-mod">
-				<ul class="fruit-bottom-mod-count" id="num-2">
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-				</ul>
-				<div class="fruit-bottom-mod-btn fruit-bottom-mod-btn3">
-					<img src="../assets/img/choose-3.png" class="btn1"/>
-					<img src="../assets/img/choose-3s.png" class="btn1 btn-act"/>
-				</div>
-			</div>
-			<div class="fruit-bottom-mod fruit-bottom-mod-4">
-				<ul class="fruit-bottom-mod-count" id="num-3">
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-				</ul>
-				<div class="fruit-bottom-mod-btn fruit-bottom-mod-btn4">
-					<img src="../assets/img/choose-4.png" class="btn1"/>
-					<img src="../assets/img/choose-4s.png" class="btn1 btn-act"/>
-				</div>
-			</div>
-			<div class="fruit-bottom-mod">
-				<ul class="fruit-bottom-mod-count" id="num-4">
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-				</ul>
-				<div class="fruit-bottom-mod-btn fruit-bottom-mod-btn5">
-					<img src="../assets/img/choose-5.png" class="btn1"/>
-					<img src="../assets/img/choose-5s.png" class="btn1 btn-act"/>
-				</div>
-			</div>
-			<div class="fruit-bottom-mod">
-				<ul class="fruit-bottom-mod-count" id="num-5">
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-				</ul>
-				<div class="fruit-bottom-mod-btn fruit-bottom-mod-btn6">
-					<img src="../assets/img/choose-6.png" class="btn1"/>
-					<img src="../assets/img/choose-6s.png" class="btn1 btn-act"/>
-				</div>
-			</div>
-			<div class="fruit-bottom-mod">
-				<ul class="fruit-bottom-mod-count" id="num-6">
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-				</ul>
-				<div class="fruit-bottom-mod-btn fruit-bottom-mod-btn7">
-					<img src="../assets/img/choose-7.png" class="btn1"/>
-					<img src="../assets/img/choose-7s.png" class="btn1 btn-act"/>
-				</div>
-			</div>
-			<div class="fruit-bottom-mod">
-				<ul class="fruit-bottom-mod-count" id="num-7">
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-					<li>
-						<img src="../assets/img/num.png" class="num"/>
-					</li>
-				</ul>
-				<div  class="fruit-bottom-mod-btn fruit-bottom-mod-btn8">
-					<img src="../assets/img/choose-8.png" class="btn1"/>
-					<img src="../assets/img/choose-8s.png" class="btn1 btn-act"/>
+				<div class="fruit-bottom-mod-btn" :class="'fruit-bottom-mod-btn'+(index+1)" @click="changeBet(index)">
+					<template v-if="index == 0">
+						<img src="../assets/img/choose-1.png" class="btn1"/>
+						<img src="../assets/img/choose-1s.png" class="btn1 btn-act"/>
+					</template>
+					<template v-else-if="index == 1">
+						<img src="../assets/img/choose-2.png" class="btn1"/>
+						<img src="../assets/img/choose-2s.png" class="btn1 btn-act"/>
+					</template>
+					<template v-else-if="index == 2">
+						<img src="../assets/img/choose-3.png" class="btn1"/>
+						<img src="../assets/img/choose-3s.png" class="btn1 btn-act"/>
+					</template>
+					<template v-else-if="index == 3">
+						<img src="../assets/img/choose-4.png" class="btn1"/>
+						<img src="../assets/img/choose-4s.png" class="btn1 btn-act"/>
+					</template>
+					<template v-else-if="index == 4">
+						<img src="../assets/img/choose-5.png" class="btn1"/>
+						<img src="../assets/img/choose-5s.png" class="btn1 btn-act"/>
+					</template>
+					<template v-else-if="index == 5">
+						<img src="../assets/img/choose-6.png" class="btn1"/>
+						<img src="../assets/img/choose-6s.png" class="btn1 btn-act"/>
+					</template>
+					<template v-else-if="index == 6">
+						<img src="../assets/img/choose-7.png" class="btn1"/>
+						<img src="../assets/img/choose-7s.png" class="btn1 btn-act"/>
+					</template>
+					<template v-else-if="index == 7">
+						<img src="../assets/img/choose-8.png" class="btn1"/>
+						<img src="../assets/img/choose-8s.png" class="btn1 btn-act"/>
+					</template>
 				</div>
 			</div>
 		</div>
@@ -324,12 +256,81 @@
 </template>
 
 <script>
+
+import $ from '../assets/js/jquery-1.7.2.js';
+//基本函数
+
+
+
+
 export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+    	aBet:[0,0,0,99,0,0,0,42],
+    	num:4
     }
+  },
+  computed:{
+  	
+  },
+  methods:{
+  	changeBet(index){
+  		var arr=[];
+  		this.aBet.forEach(function(value,i){
+  			if((i == index) && (value<99)){
+  				value++;
+  			}
+  			arr.push(value);
+  		});
+  		this.aBet=arr;
+  	},
+  	addNum(){
+  		this.num++;
+  	}
+  },
+  watch:{
+  	aBet(value){
+  		
+  		//监听各押注数字
+			var aNum=$('.fruit-bottom .fruit-bottom-mod');
+			for(var i=0;i<this.aBet.length;i++){
+				aNum.eq(i).find('.fruit-bottom-mod-count li').eq(0).find('.num').css({
+					top:-0.35*parseInt(this.aBet[i]/10)+'rem'
+				});
+				aNum.eq(i).find('.fruit-bottom-mod-count li').eq(1).find('.num').css({
+					top:-0.35*(this.aBet[i]%10)+'rem'
+				});
+			}
+
+  	}
+  },
+  mounted(){
+  	
+  	//初始化各押注数字
+		var aNum=$('.fruit-bottom .fruit-bottom-mod');
+		for(var i=0;i<this.aBet.length;i++){
+			aNum.eq(i).find('.fruit-bottom-mod-count li').eq(0).find('.num').css({
+				top:-0.35*parseInt(this.aBet[i]/10)+'rem'
+			});
+			aNum.eq(i).find('.fruit-bottom-mod-count li').eq(1).find('.num').css({
+				top:-0.35*(this.aBet[i]%10)+'rem'
+			});
+		}
+		
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   }
 }
 </script>
