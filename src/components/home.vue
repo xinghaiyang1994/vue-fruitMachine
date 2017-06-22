@@ -194,7 +194,7 @@
 				</li>
 			</ul>
 			
-			<div class="btn3-mod" id="start" @click="addNum">
+			<div class="btn3-mod" id="start" >
 				<img src="../assets/img/start.png"/>
 				<img src="../assets/img/starts.png" class="btn3-mod-act"/>
 			</div>
@@ -259,6 +259,54 @@
 
 import $ from '../assets/js/jquery-1.7.2.js';
 //基本函数
+function toSeven(n){
+	var n=''+n;
+	var arr=n.split('');
+	while (arr.length<7){
+		arr.unshift('0');
+	}
+	return arr.join('');
+}
+
+var h=0.35;
+
+
+var iNow=0;
+var timer;
+
+function core(){
+	iNow++;
+	$('.fruit-body > li').eq(iNow % 24).addClass('fruit-mod-act').siblings('li').removeClass('fruit-mod-act');
+}
+
+
+function start(){
+	clearInterval(timer)
+	timer=setTimeout(function(){
+		
+		core();
+		clearTimeout(timer);
+		timer=setTimeout(function(){
+			
+			core();
+			clearTimeout(timer);
+			timer=setTimeout(function(){
+				core();
+				clearTimeout(timer);
+				timer=setInterval(function(){
+					core();
+				},500)
+				
+			},50);
+		},250);
+		
+	},350);
+	
+}
+
+start();
+
+
 
 
 
@@ -267,27 +315,37 @@ export default {
   name: 'hello',
   data () {
     return {
-    	aBet:[0,0,0,99,0,0,0,42],
-    	num:4
+    	aBet:[0,0,0,0,0,0,0,0],
+    	total:10
     }
   },
   computed:{
-  	
+  	res(){
+  		var i=0;
+  		var resNum=0;
+  		this.aBet.forEach(function(value){
+  			i+=value;
+  		});
+  		if(this.total >= i){
+  			resNum=this.total-i;
+  		}
+  		return resNum;
+  	}
   },
   methods:{
   	changeBet(index){
+  		var self=this;
   		var arr=[];
   		this.aBet.forEach(function(value,i){
-  			if((i == index) && (value<99)){
+  			if((i == index) && (value<99) && (self.res > 0)){
   				value++;
   			}
   			arr.push(value);
   		});
   		this.aBet=arr;
-  	},
-  	addNum(){
-  		this.num++;
+  		console.log(this.aBet);
   	}
+  	
   },
   watch:{
   	aBet(value){
@@ -296,29 +354,47 @@ export default {
 			var aNum=$('.fruit-bottom .fruit-bottom-mod');
 			for(var i=0;i<this.aBet.length;i++){
 				aNum.eq(i).find('.fruit-bottom-mod-count li').eq(0).find('.num').css({
-					top:-0.35*parseInt(this.aBet[i]/10)+'rem'
+					top:-h*parseInt(this.aBet[i]/10)+'rem'
 				});
 				aNum.eq(i).find('.fruit-bottom-mod-count li').eq(1).find('.num').css({
-					top:-0.35*(this.aBet[i]%10)+'rem'
+					top:-h*(this.aBet[i]%10)+'rem'
 				});
 			}
+
+  	},
+  	res(value){
+//		剩余金币
+  		var aTotal=$('#num-total li');
+  		var value=toSeven(value)
+  		for(var i=0;i<7;i++){
+  			aTotal.eq(i).find('img').css({
+  				top:-h*value.charAt(i)+'rem'
+  			})
+  		}
 
   	}
   },
   mounted(){
   	
-  	//初始化各押注数字
+//	初始化各押注数字
 		var aNum=$('.fruit-bottom .fruit-bottom-mod');
 		for(var i=0;i<this.aBet.length;i++){
 			aNum.eq(i).find('.fruit-bottom-mod-count li').eq(0).find('.num').css({
-				top:-0.35*parseInt(this.aBet[i]/10)+'rem'
+				top:-h*parseInt(this.aBet[i]/10)+'rem'
 			});
 			aNum.eq(i).find('.fruit-bottom-mod-count li').eq(1).find('.num').css({
-				top:-0.35*(this.aBet[i]%10)+'rem'
+				top:-h*(this.aBet[i]%10)+'rem'
 			});
 		}
 		
-  	
+//	初始化剩余金币
+  	var aTotal=$('#num-total li');
+  	var value=toSeven(this.res);
+  	for(var i=0;i<7;i++){
+  		aTotal.eq(i).find('img').css({
+  			top:-h*value.charAt(i)+'rem'
+  		})
+  	}  	
   	
   	
   	
