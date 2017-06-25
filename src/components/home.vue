@@ -194,7 +194,7 @@
 				</li>
 			</ul>
 			
-			<div class="btn3-mod" id="start" >
+			<div class="btn3-mod" id="start" @click="start">
 				<img src="../assets/img/start.png"/>
 				<img src="../assets/img/starts.png" class="btn3-mod-act"/>
 			</div>
@@ -256,7 +256,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 import $ from '../assets/js/jquery-1.7.2.js';
 //基本函数
 function toSeven(n){
@@ -274,37 +274,7 @@ var h=0.35;
 var iNow=0;
 var timer;
 
-function core(){
-	iNow++;
-	$('.fruit-body > li').eq(iNow % 24).addClass('fruit-mod-act').siblings('li').removeClass('fruit-mod-act');
-}
 
-
-function start(){
-	clearInterval(timer)
-	timer=setTimeout(function(){
-		
-		core();
-		clearTimeout(timer);
-		timer=setTimeout(function(){
-			
-			core();
-			clearTimeout(timer);
-			timer=setTimeout(function(){
-				core();
-				clearTimeout(timer);
-				timer=setInterval(function(){
-					core();
-				},500)
-				
-			},50);
-		},250);
-		
-	},350);
-	
-}
-
-start();
 
 
 
@@ -315,6 +285,7 @@ export default {
   name: 'hello',
   data () {
     return {
+    	iNow:0,
     	aBet:[0,0,0,0,0,0,0,0],
     	total:10
     }
@@ -330,6 +301,15 @@ export default {
   			resNum=this.total-i;
   		}
   		return resNum;
+  	},
+  	isBet(){
+  		var bOk=false;
+  		this.aBet.forEach(function(value){
+  			if(value != 0){
+  				bOk=true;
+  			}
+  		});
+  		return bOk;
   	}
   },
   methods:{
@@ -343,14 +323,9 @@ export default {
   			arr.push(value);
   		});
   		this.aBet=arr;
-  		console.log(this.aBet);
-  	}
-  	
-  },
-  watch:{
-  	aBet(value){
-  		
-  		//监听各押注数字
+  	},
+  	waBet(){
+//	     监听各押注数字函数
 			var aNum=$('.fruit-bottom .fruit-bottom-mod');
 			for(var i=0;i<this.aBet.length;i++){
 				aNum.eq(i).find('.fruit-bottom-mod-count li').eq(0).find('.num').css({
@@ -360,43 +335,87 @@ export default {
 					top:-h*(this.aBet[i]%10)+'rem'
 				});
 			}
-
   	},
-  	res(value){
-//		剩余金币
-  		var aTotal=$('#num-total li');
-  		var value=toSeven(value)
-  		for(var i=0;i<7;i++){
-  			aTotal.eq(i).find('img').css({
-  				top:-h*value.charAt(i)+'rem'
-  			})
-  		}
+  	wres(){
+//		剩余金币函数
+	  	var aTotal=$('#num-total li');
+	  	var value=toSeven(this.res);
+	  	for(var i=0;i<7;i++){
+	  		aTotal.eq(i).find('img').css({
+	  			top:-h*value.charAt(i)+'rem'
+	  		})
+	  	}  	  		
+  	},
+  	core(){
+//		运动核心
+			this.iNow++;
+			$('.fruit-body > li').eq(this.iNow % 24).addClass('fruit-mod-act').siblings('li').removeClass('fruit-mod-act');
+  	},
+  	start(){
+//		游戏开始
+			var self=this;
+			
+			if(this.isBet){
+//					$.ajax({
+//						url:'http://www.xinghaiyang.com/fruitMachine/php/start.php',
+//						data:{
+//							res:self.res,
+//							aBet:self.aBet
+//						},
+//						success:function(res){
+//							console.log(res)
+//						}
+//					})
 
+				axios({
+					url:'http://www.xinghaiyang.com/fruitMachine/php/start.php',
+					params:{
+						res:self.res,
+						aBet:self.aBet
+					}
+				}).then(function(res){
+					console.log(res);
+					var resData=res.data;
+					var stopNum=resData.num+24*2;
+					console.log(stopNum,'开始');
+					clearInterval(timer);
+					timer=setInterval(function(){
+						self.core();
+						if(self.iNow == stopNum){
+							clearInterval(timer);
+							self.iNow %= 24;
+							console.log(self.iNow,'结束');
+						}
+					},100);
+					
+				}).catch(function(){
+					alert('下注失败');
+				});
+				
+				
+			}else{
+				alert('请下注');
+			}
+					
+  	}
+  },
+  watch:{
+  	aBet(){
+//		监听各押注数字 		
+			this.waBet();
+  	},
+  	res(){
+//		剩余金币
+			this.wres();
   	}
   },
   mounted(){
   	
 //	初始化各押注数字
-		var aNum=$('.fruit-bottom .fruit-bottom-mod');
-		for(var i=0;i<this.aBet.length;i++){
-			aNum.eq(i).find('.fruit-bottom-mod-count li').eq(0).find('.num').css({
-				top:-h*parseInt(this.aBet[i]/10)+'rem'
-			});
-			aNum.eq(i).find('.fruit-bottom-mod-count li').eq(1).find('.num').css({
-				top:-h*(this.aBet[i]%10)+'rem'
-			});
-		}
+		this.waBet();
 		
 //	初始化剩余金币
-  	var aTotal=$('#num-total li');
-  	var value=toSeven(this.res);
-  	for(var i=0;i<7;i++){
-  		aTotal.eq(i).find('img').css({
-  			top:-h*value.charAt(i)+'rem'
-  		})
-  	}  	
-  	
-  	
+ 		this.wres();
   	
   	
   	
